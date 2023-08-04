@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.item {
+    background-color: deepskyblue;
+    display: grid;
+    font-size: 2rem;
+    height: 50vh;
+    place-content: center;
+}
