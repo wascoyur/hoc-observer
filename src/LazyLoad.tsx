@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect} from "react";
+import React, { useEffect} from "react";
 
 export const Placeholder=(props:{width?:number|string, height?:number|string})=>{
     const width =
@@ -24,29 +24,29 @@ export const LazyLoad = (props: LazyLoadProps) => {
     const childRef = React.useRef<HTMLDivElement>(null);
     const [isIntersecting, setIntersecting] = React.useState(false);
 
-useEffect(() => {
-        // потомок
-        const child = childRef.current as HTMLDivElement;
+    useEffect(() => {
+            // потомок
+            const child = childRef.current as HTMLDivElement;
 
-        // наблюдатель
-        const observer = new IntersectionObserver(([entry]) => {
-            // обновляем состояние индикатора
-            setIntersecting(entry.isIntersecting);
+            // наблюдатель
+            const observer = new IntersectionObserver(([entry]) => {
+                // обновляем состояние индикатора
+                setIntersecting(entry.isIntersecting);
 
-            // если элемент находится в области просмотра и
-            // индикатор однократности имеет значение `true`
-            if (props.once && entry.isIntersecting) {
-                // прекращаем наблюдение
-                observer.unobserve(child);
-            }
-        }, props.observerOptions);
+                // если элемент находится в области просмотра и
+                // индикатор однократности имеет значение `true`
+                if (props.once && entry.isIntersecting) {
+                    // прекращаем наблюдение
+                    observer.unobserve(child);
+                }
+            }, props.observerOptions);
 
-        // начинаем наблюдение
-        observer.observe(child);
+            // начинаем наблюдение
+            observer.observe(child);
 
-        // прекращаем наблюдение при размонтировании компонента
-        return () => observer.unobserve(child);
-    }, []);
+            // прекращаем наблюдение при размонтировании компонента
+            return () => observer.unobserve(child);
+        }, []);
 
     if (props.once && isIntersecting) return props.children;
 
